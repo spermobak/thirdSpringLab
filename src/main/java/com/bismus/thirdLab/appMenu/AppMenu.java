@@ -3,13 +3,13 @@ package com.bismus.thirdLab.appMenu;
 import com.bismus.thirdLab.service.LanguageService;
 import com.bismus.thirdLab.service.MessageService;
 import com.bismus.thirdLab.service.PersonService;
+import com.bismus.thirdLab.service.ReaderService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
 
 import java.util.Locale;
 import java.util.ResourceBundle;
-import java.util.Scanner;
 
 
 @ShellComponent
@@ -19,7 +19,7 @@ public class AppMenu {
     private final LanguageService languageService;
     private final MessageService messageService;
 
-    private final Scanner scanner = new Scanner(System.in);
+    private final ReaderService readerService;
 
     private ResourceBundle message = ResourceBundle.getBundle("interfaceLanguage", new Locale("en"));
 
@@ -36,7 +36,7 @@ public class AppMenu {
     @ShellMethod("Find person by id")
     public void findById() {
         messageService.printInterfaceMessage(message, "findById");
-        int id = scanner.nextInt();
+        int id = readerService.readID();
 
         if (personService.findById(id) == null) {
             messageService.printInterfaceMessage(message, "notFoundPerson");
@@ -49,7 +49,7 @@ public class AppMenu {
     @ShellMethod("Find person by name")
     public void findByName() {
         messageService.printInterfaceMessage(message, "findByName");
-        var name = scanner.next();
+        var name = readerService.readWord();
 
         if (personService.findByName(name) == null) {
             messageService.printInterfaceMessage(message, "notFoundPerson");
@@ -63,7 +63,7 @@ public class AppMenu {
     public void changeLanguage() {
         messageService.printInterfaceMessage(message, "changeLanguage");
         languageService.printLanguageKey();
-        var lang = scanner.next();
+        var lang = readerService.readWord();
         message = languageService.setInterfaceLanguage(lang, message);
     }
 
