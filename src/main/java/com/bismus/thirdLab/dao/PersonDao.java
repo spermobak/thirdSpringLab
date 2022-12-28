@@ -14,7 +14,7 @@ public class PersonDao {
 
     private static final String SQL_GET_ALL_PERSONS = "Select * from person";
     private static final String SQL_GET_PERSON_BY_ID = "Select * from person where id = ?";
-    private static final String SQL_GET_PERSON_BY_NAME = "Select * from person where name = ?";
+    private static final String SQL_GET_PERSON_BY_NAME = "Select * from person where username = ?";
 
     Connection connection = ConnectionAgent.getNewConnection();
 
@@ -30,7 +30,7 @@ public class PersonDao {
 
                 Person person = new Person();
                 person.setId(resultSet.getInt("id"));
-                person.setName(resultSet.getString("name"));
+                person.setName(resultSet.getString("username"));
                 person.setAge(resultSet.getInt("age"));
 
                 personList.add(person);
@@ -53,7 +53,7 @@ public class PersonDao {
 
             person = new Person();
             person.setId(resultSet.getInt("id"));
-            person.setName(resultSet.getString("name"));
+            person.setName(resultSet.getString("username"));
             person.setAge(resultSet.getInt("age"));
 
         } catch (SQLException e) {
@@ -73,7 +73,7 @@ public class PersonDao {
 
                 Person person = new Person();
                 person.setId(resultSet.getInt("id"));
-                person.setName(resultSet.getString("name"));
+                person.setName(resultSet.getString("username"));
                 person.setAge(resultSet.getInt("age"));
 
                 personList.add(person);
