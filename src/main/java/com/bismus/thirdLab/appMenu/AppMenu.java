@@ -8,7 +8,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
 
-import java.util.Locale;
 import java.util.ResourceBundle;
 
 
@@ -21,7 +20,7 @@ public class AppMenu {
 
     private final ReaderService readerService;
 
-    private ResourceBundle message = ResourceBundle.getBundle("interfaceLanguage", new Locale("en"));
+    private ResourceBundle message = languageService.setDefaultInterfaceLanguage();
 
 
     @ShellMethod("Find all persons")
